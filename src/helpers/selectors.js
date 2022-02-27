@@ -7,11 +7,12 @@ export function getAppointmentsForDay(state, day) {
   const appointmentIds = matchedDay[0].appointments;
   
   const appointmentArray = [];
-  for (const key in state.appointments) {
-    if (appointmentIds.includes(parseInt(key))) {
-      appointmentArray.push(state.appointments[key]);
+  appointmentIds.forEach(id => {
+    if (state.appointments[id]) {
+      appointmentArray.push(state.appointments[id]);
     }
-  }
+  })
+
   return appointmentArray;
 }
 
@@ -44,10 +45,11 @@ export function getInterviewersForDay(state, day) {
   const interviewerIds = matchedDay[0].interviewers;
   
   const interviewersArray = [];
-  for (const key in state.interviewers) {
-    if (interviewerIds.includes(parseInt(key))) {
-      interviewersArray.push(state.interviewers[key]);
+  interviewerIds.forEach(id => {
+    if (state.interviewers[id]) {
+      interviewersArray.push(state.interviewers[id]);
     }
-  }
+  })
+
   return interviewersArray;
 }
