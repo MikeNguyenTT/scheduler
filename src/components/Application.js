@@ -8,6 +8,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 const GET_DAYS = "/api/days";
 const GET_APPOINTMENTS ="/api/appointments";
 const GET_INTERVIEWERS ="/api/interviewers";
+const NEW_APPOINTMENT_PREFIX ="/api/appointments/";
 
 export default function Application(props) {
 
@@ -29,6 +30,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview = {bookInterview}
       />
     )
   })
@@ -42,6 +44,24 @@ export default function Application(props) {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data , interviewers: all[2].data }));
     });
   }, []);
+
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(NEW_APPOINTMENT_PREFIX + appointment.id, { interview: interview })
+      .then(res => {
+        setState({...state, appointments});
+      });
+
+  }
 
   return (
     <main className="layout">
@@ -67,7 +87,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments}
-        <section className="appointment"><Appointment key="last" time="5pm" /></section>
+        <section className="appointment"><Appointment key="last" time="5pm" bookInterview = {bookInterview}/></section>
       </section>
     </main>
   );
