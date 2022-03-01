@@ -28,7 +28,6 @@ export default function useApplicationData() {
         return {...state, days , appointments , interviewers}
       }
       case SET_INTERVIEW: {
-        console.log("VVVVVVVVVVV");
         const { id, interview } = action;
         const appointment = {
           ...state.appointments[id],
@@ -61,7 +60,6 @@ export default function useApplicationData() {
 
     webSocket.onmessage = (event) => {
       const receivedData = JSON.parse(event.data)
-      console.log(receivedData);
 
       if (receivedData.type === SET_INTERVIEW) {
         const { type, id, interview } = receivedData;
