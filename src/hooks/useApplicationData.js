@@ -39,10 +39,7 @@ export default function useApplicationData() {
           [id]: appointment
         };
 
-        const newState = {...state, appointments};
-        updateSpots(newState, newState.day);
-        
-        return newState;
+        return {...state, appointments, days: updateSpots(state, appointments)};
       }
       default:
         throw new Error(
@@ -66,7 +63,6 @@ export default function useApplicationData() {
         dispatch({ type, id, interview });
       }
     }
-
 
     Promise.all([
       axios.get(GET_DAYS),
@@ -98,16 +94,21 @@ export default function useApplicationData() {
       });
   }
 
-  function updateSpots(newState, day) {
+  function updateSpots (state, appointments) {
 
-    const currentDay = newState.days.find(dayItem => dayItem.name === day);
+    state.appointments = appointments;
+    const newDays = JSON.parse(JSON.stringify(state.days));
+  
+    const currentDay = newDays.find(dayItem => dayItem.name === state.day);
     const appointmentIds = currentDay.appointments;
-
-    const emptyInterviewsForTheDay = appointmentIds.filter(id => !newState.appointments[id].interview);
+  
+    const emptyInterviewsForTheDay = appointmentIds.filter(id => !state.appointments[id].interview);
     const spots = emptyInterviewsForTheDay.length;
-
+  
     currentDay.spots = spots;
-  }
+
+    return newDays;
+  };
 
   return { state, setDay, bookInterview, cancelInterview };
 }
