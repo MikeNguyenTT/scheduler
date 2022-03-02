@@ -160,7 +160,7 @@ describe("Application", () => {
 
   });
 
-  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
     
     // 1. Render the Application.

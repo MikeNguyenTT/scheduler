@@ -1,14 +1,15 @@
 import { useReducer, useEffect } from "react";
 import axios from "axios";
+import reducer, {
+  SET_DAY,
+  SET_APPLICATION_DATA,
+  SET_INTERVIEW
+} from "reducers/application";
 
 const GET_DAYS = "/api/days";
 const GET_APPOINTMENTS ="/api/appointments";
 const GET_INTERVIEWERS ="/api/interviewers";
 const PUT_DELETE_APPOINTMENT_PREFIX ="/api/appointments/";
-
-const SET_DAY = "SET_DAY";
-const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
-const SET_INTERVIEW = "SET_INTERVIEW";
 
 export default function useApplicationData() {
 
@@ -19,35 +20,7 @@ export default function useApplicationData() {
     interviewers: {}
   })
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case SET_DAY:
-        return { ...state, day: action.value }
-      case SET_APPLICATION_DATA: {
-        const { days, appointments, interviewers } = action;
-        return {...state, days , appointments , interviewers}
-      }
-      case SET_INTERVIEW: {
-        const { id, interview } = action;
-        const appointment = {
-          ...state.appointments[id],
-          interview: interview ? { ...interview } : null
-        };
-    
-        const appointments = {
-          ...state.appointments,
-          [id]: appointment
-        };
-
-        return {...state, appointments, days: updateSpots(state, appointments)};
-      }
-      default:
-        throw new Error(
-          `Tried to reduce with unsupported action type: ${action.type}`
-        );
-    }
-  }
-
+  
   useEffect(() => {
 
     const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
@@ -93,22 +66,6 @@ export default function useApplicationData() {
         dispatch({ type: SET_INTERVIEW, id, interview: null });
       });
   }
-
-  function updateSpots (state, appointments) {
-
-    state.appointments = appointments;
-    const newDays = JSON.parse(JSON.stringify(state.days));
-  
-    const currentDay = newDays.find(dayItem => dayItem.name === state.day);
-    const appointmentIds = currentDay.appointments;
-  
-    const emptyInterviewsForTheDay = appointmentIds.filter(id => !state.appointments[id].interview);
-    const spots = emptyInterviewsForTheDay.length;
-  
-    currentDay.spots = spots;
-
-    return newDays;
-  };
 
   return { state, setDay, bookInterview, cancelInterview };
 }
