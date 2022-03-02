@@ -23,3 +23,27 @@ npm test
 npm run storybook
 ```
 Storybook will start at port 9009: http://localhost:9009/
+
+## Tech stack
+
+Developement: React, Webpack Dev Server, PostgresSQL.
+Auto Build and Deployment: Heroku, CircleCI, Netlify.
+Test: 
+  Visual Testbed: Storybook.
+  Unit and Integration Jest: Jest, React Testing Library
+  End-to-end test: Cypress
+
+
+## Screenshot
+
+Create a new appointment
+
+https://github.com/MikeNguyenTT/scheduler/blob/master/docs/Saving.gif?raw=true 
+
+Cancel an existing appointment
+
+https://github.com/MikeNguyenTT/scheduler/blob/master/docs/Deleting.gif?raw=true
+
+WebSocket: all create/update/cancel operation are updated in DB and server notified all other connecting client automatically
+
+https://github.com/MikeNguyenTT/scheduler/blob/master/docs/WebSocket.gif?raw=true
