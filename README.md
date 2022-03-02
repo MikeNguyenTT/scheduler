@@ -36,14 +36,20 @@ Storybook will start at port 9009: http://localhost:9009/
 
 ## Screenshot
 
-Create a new appointment
+
+
+#### Create a new appointment
 
 ![Create a new appointment](https://github.com/MikeNguyenTT/scheduler/blob/master/docs/Saving.gif?raw=true)
 
-Cancel an existing appointment
+
+
+#### Cancel an existing appointment
 
 ![Cancel an existing appointment](https://github.com/MikeNguyenTT/scheduler/blob/master/docs/Deleting.gif?raw=true)
 
-WebSocket: all create/update/cancel operation are updated in DB and server notified all other connecting client automatically
+
+
+#### WebSocket: all create/update/cancel operation are updated in DB and server notified all other connecting client automatically
 
 ![Cancel an existing appointment](https://github.com/MikeNguyenTT/scheduler/blob/master/docs/WebSocket.gif?raw=true)
