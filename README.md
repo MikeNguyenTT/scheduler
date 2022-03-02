@@ -9,6 +9,7 @@ Install dependencies with `npm install`.
 ```sh
 npm start
 ```
+Scheduler server will start at port 8000: http://http://localhost:8000/
 
 ## Running Jest Test Framework
 
@@ -21,3 +22,4 @@ npm test
 ```sh
 npm run storybook
 ```
+Storybook will start at port 9009: http://localhost:9009/
