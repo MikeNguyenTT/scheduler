@@ -30,7 +30,7 @@ Storybook will start at port 9009: http://localhost:9009/
 ### Auto Build and Deployment: Heroku, CircleCI, Netlify.
 ### Test: 
   #### Visual Testbed: Storybook.
-  #### Unit and Integration Jest: Jest, React Testing Library
+  #### Unit and Integration test: Jest, React Testing Library
   #### End-to-end test: Cypress
 
 
