@@ -50,6 +50,6 @@ Storybook will start at port 9009: http://localhost:9009/
 
 
 
-#### WebSocket: all create/update/cancel operation are updated in DB and server notified all other connecting client automatically
+#### WebSocket: all create/update/cancel operation are updated in DB and server will notify all other connecting clients to update automatically
 
 ![Cancel an existing appointment](https://github.com/MikeNguyenTT/scheduler/blob/master/docs/WebSocket.gif?raw=true)
